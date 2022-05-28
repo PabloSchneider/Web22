@@ -1,0 +1,41 @@
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+
+<head encoding="utf-8"></head>
+
+<body>
+
+    <h1 th:text="#{profilliste.titel}">Benutzerprofil</h1>
+    <div>
+        <a th:href="@{?sprache=de}">de</a>
+        <a th:href="@{?sprache=en}">en</a>
+        <a th:href="@{?sprache=nl}">nl</a>
+    </div>
+    <a></a>
+    <table>
+        <thead>
+            <tr>
+                <th th:text="#{profilliste.tab.name}"></th>
+                <th th:text="#{profilliste.tab.geburtsdatum}"></th>
+                <th th:text="#{profilliste.tab.email}"></th>
+                <th th:text="#{profilliste.tab.adresse}"></th>
+                <th th:text="#{profilliste.tab.loeschen}"></th>
+
+            </tr>
+        </thead>
+        <tr th:each="ele, status : ${profilliste}">
+            <td>
+                <a th:href="@{/benutzerprofil/liste?op=bearbeiten&id={id}(id=${ele.Id})}" th:text="${ele.getName}"></a>
+            </td>
+            <td th:text="${ele.getGeburtsdatum}"></td>
+            <td th:text="${ele.getEmail}"></td>
+            <td th:text="${ele.getAdresse}"></td>
+            <td>
+                <a th:href="@{/benutzerprofil/liste?op=loeschen&id={id}(id=${ele.getId})}">
+                    <button> X </button>
+                </a>
+            </td>
+
+        </tr>
+    </table>
+
+</body>

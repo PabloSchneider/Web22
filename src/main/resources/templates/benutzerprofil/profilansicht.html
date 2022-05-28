@@ -1,0 +1,78 @@
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+
+<head encoding="utf-8"></head>
+
+<body>
+
+    <h1 th:text="#{profilansicht.titel}">Benutzerprofil</h1>
+    <div>
+        <a th:href="@{?sprache=de}">de</a>
+        <a th:href="@{?sprache=en}">en</a>
+        <a th:href="@{?sprache=nl}">nl</a>
+    </div>
+    <a href=/benutzerprofil/clearsession>clearSession</a>
+
+
+    <h3 th:text="#{profil.ihredaten}">Ihre Daten</h3>
+    <ul></ul>
+
+    <table th:object="${profil}">
+        <tr>
+            <td th:text="#{profil.name}">Name</td>
+            <td th:text="*{name}">name?</td>
+        </tr>
+        <tr>
+            <td th:text="#{profil.geburtsdatum}">Geburtsdatum</td>
+            <td th:text="*{geburtsdatum}">gb?</td>
+        </tr>
+        <tr>
+            <td th:text="#{profil.adresse}">Adresse</td>
+            <td th:text="*{adresse}">adrs?</td>
+        </tr>
+        <tr>
+            <td th:text="#{profil.email}">eMail</td>
+            <td th:text="*{email}">mail?</td>
+        </tr>
+        <tr>
+            <td th:text="#{profil.lieblingsfarbe}">Lieblingsfarbe</td>
+            <td th:text="*{lieblingsfarbe}">farbe</td>
+        </tr>
+    </table>
+
+    <a th:href="@{/benutzerprofil/bearbeiten}" th:text="#{profil.bearbeiten}">Edit</a>
+
+
+    <a th:if="${profil.getLat} != 0" th:href="@{https://www.openstreetmap.org/#map={zoom}/{lat}/{lon}(zoom = 17, lat=${profil.getLat}, lon=${profil.getLon})}" target="_blank">Mein Standort</a>
+
+    <h3 th:text="#{profil.interessen}">Ihre Interessen</h3>
+    <table>
+        <tr th:each="ele, status : ${profil.getInteressenListe}">
+            <td th:text="${status.count}"></td>
+            <td th:text="${ele}"></td>
+        </tr>
+    </table>
+    <h3 th:text="#{profil.angebote.titel}"></h3>
+
+    <div th:if="${profil.getId} != 0">
+        <table>
+            <tr th:each="ele, status : ${profil.getAngebote}">
+                <td>
+                    <a th:text="${ele.getBeschreibung}" th:href="@{https://www.openstreetmap.org/#map={zoom}/{lat}/{lon}(zoom = 17, lat=${ele.getLat}, lon=${ele.getLon})}" target="_blank"></a>
+                </td>
+                <td th:text="${ele.getMindestpreis}"></td>
+                <td th:text="${ele.getAblaufzeitpunkt}"></td>
+                <td>
+                    <a th:href="@{/benutzerprofil/angebot/{id}/del (id=${ele.getId})}">
+                        <button> X </button>
+                    </a>
+                </td>
+            </tr>
+        </table>
+        <a th:href="@{/benutzerprofil/angebot}">
+            <button th:text="#{profil.angebote.anlegen} ">neu</button>
+        </a>
+    </div>
+
+</body>
+
+</html>

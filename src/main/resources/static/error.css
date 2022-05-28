@@ -1,0 +1,17 @@
+.errors {
+    border-color: red;
+    border-width: 2px;
+    color: red;
+    font-size: small;
+}
+
+.error {
+    border-color: red;
+    border-width: 2px;
+    color: red;
+    font-size: small;
+}
+
+h1 {
+    color: royalblue;
+}

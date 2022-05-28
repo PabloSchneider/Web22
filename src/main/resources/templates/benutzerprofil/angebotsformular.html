@@ -1,0 +1,28 @@
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+
+<head encoding="utf-8">
+    <link rel="stylesheet" type="text/css" href="/error.css" />
+</head>
+
+<body>
+    <h1 th:text="#{angebot.editor.titel}">Angebot bearbeiten</h1>
+    <div>
+        <a th:href="@{?sprache=de}">de</a>
+        <a th:href="@{?sprache=en}">en</a>
+        <a th:href="@{?sprache=nl}">nl</a>
+    </div>
+    <h3 th:text="#{angebot.editor.titel}">Angebot bearbeiten</h3>
+
+    <form th:action="@{/benutzerprofil/angebot}" method="POST" th:object="${angebot}">
+        <label for="beschreibung" th:text="#{angebot.editor.beschreibung}"></label><br>
+        <input type="text" name="beschreibung" th:field="*{beschreibung}" /><br>
+        <label for="mindestpreis" th:text="#{angebot.editor.mindestpreis}"></label><br>
+        <input type="text" name="mindestpreis" th:field="*{mindestpreis}" /><br>
+        <label for="ablaufzeitpunkt" th:text="#{angebot.editor.ablaufzeitpunkt}"></label><br>
+        <input type="datetime-local" name="ablaufzeitpunkt" th:field="*{ablaufzeitpunkt}" /><br>
+        <label for="abholort" th:text="#{angebot.editor.abholort}"> Angebot </label><br>
+        <input type="text" name="abholort" th:field="*{abholort}" /><br>
+        <button type="submit" th:text="#{angebot.editor.speichern}"></button>
+    </form>
+
+</body>
