@@ -17,13 +17,11 @@ long topgebot, long gebote)
     
     static GetAngebotResponseDTO from(Angebot a){
         long maxpreis = a.getMindestpreis();
-        long counter = 0;
         for (Gebot e : a.getGebote()){
-            counter++;
             if(e.getBetrag() > maxpreis){
                 maxpreis = e.getBetrag();
             }
         }
-        return new GetAngebotResponseDTO(a.getId(), a.getBeschreibung(), a.getAnbieter().getId(), a.getAnbieter().getName(), a.getMindestpreis(), a.getAblaufzeitpunkt(), a.getAbholort(), a.getLat(), a.getLon(), maxpreis, counter);
+        return new GetAngebotResponseDTO(a.getId(), a.getBeschreibung(), a.getAnbieter().getId(), a.getAnbieter().getName(), a.getMindestpreis(), a.getAblaufzeitpunkt(), a.getAbholort(), a.getLat(), a.getLon(), maxpreis, (long) a.getGebote().size());
     }
 }

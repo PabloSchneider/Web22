@@ -32,10 +32,12 @@ public class  BenutzerAngebotRestController {
         }
         return angebote;
     }
+
     @GetMapping(value="/angebot/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
     public GetAngebotResponseDTO getAngebotById(@PathVariable long id){
         return GetAngebotResponseDTO.from(bService.findeAngebotMitId(id).get());
     }
+
     @GetMapping(value="/angebot/{id}/gebot", produces = MediaType.APPLICATION_JSON_VALUE)
     public List<GetGebotResponseDTO> getGebobteByAngebotID(@PathVariable long id){
         List<GetGebotResponseDTO> geboteDTO = new ArrayList<>();
@@ -48,6 +50,7 @@ public class  BenutzerAngebotRestController {
         }
         return geboteDTO;
     }
+    
     @GetMapping(value="/benutzer/{id}/angebot", produces = MediaType.APPLICATION_JSON_VALUE)
     public List<GetAngebotResponseDTO> getAngeboteByBenutzerID(@PathVariable long id){
         List<GetAngebotResponseDTO> angebote = new ArrayList<>();
