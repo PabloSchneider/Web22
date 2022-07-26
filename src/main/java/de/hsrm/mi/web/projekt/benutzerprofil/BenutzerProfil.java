@@ -12,17 +12,21 @@ import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 import javax.persistence.Version;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.PastOrPresent;
 import javax.validation.constraints.Size;
 
+import org.hibernate.annotations.Fetch;
+import org.hibernate.annotations.FetchMode;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.format.annotation.DateTimeFormat.ISO;
 
 import de.hsrm.mi.web.projekt.angebot.Angebot;
 import de.hsrm.mi.web.projekt.gebot.Gebot;
+import de.hsrm.mi.web.projekt.projektuser.ProjektUser;
 import de.hsrm.mi.web.projekt.validierung.Bunt;
 
 @Entity
@@ -59,11 +63,15 @@ public class BenutzerProfil implements Serializable{
     String interessen;
     
     @OneToMany(mappedBy="anbieter", cascade = CascadeType.ALL , orphanRemoval = true, fetch = FetchType.EAGER)
+    @Fetch(value = FetchMode.SUBSELECT)
     private List<Angebot> angebote;
 
+    @Fetch(value = FetchMode.SUBSELECT)
     @OneToMany(mappedBy="gebieter", cascade = CascadeType.ALL , orphanRemoval = true, fetch = FetchType.EAGER)
     private List<Gebot> gebote;
 
+    @OneToOne(mappedBy = "profil", cascade = CascadeType.REMOVE)
+    private ProjektUser projektUser;
 
     public BenutzerProfil(){
         name = "";
@@ -179,6 +187,12 @@ public class BenutzerProfil implements Serializable{
   
    
 
+    public void setProjektUser(ProjektUser projektUser) {
+        this.projektUser = projektUser;
+    }
+    public ProjektUser getProjektUser() {
+        return projektUser;
+    }
     @Override
     public String toString() {
         return "BenutzerProfil [adresse=" + adresse + ", email=" + email + ", geburtsdatum=" + geburtsdatum + ", id="

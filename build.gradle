@@ -20,13 +20,15 @@ dependencies {
 	developmentOnly 'org.springframework.boot:spring-boot-devtools'
 	testImplementation 'org.springframework.boot:spring-boot-starter-test'
 	implementation 'org.springframework.boot:spring-boot-starter-webflux'
-
+	implementation 'org.springframework.boot:spring-boot-starter-websocket'
+	implementation 'org.springframework.boot:spring-boot-starter-security'
 	implementation('org.springframework.boot:spring-boot-starter-data-jpa')  {
     // Workaround wg Bug in aktuellem hibernate-core 5.6.6/5.6.7
     exclude group: 'org.hibernate', module: 'hibernate-core'  	
 	}
   	implementation 'org.hibernate:hibernate-core:5.6.5.Final'
   	runtimeOnly 'com.h2database:h2'
+	runtimeOnly 'org.thymeleaf.extras:thymeleaf-extras-springsecurity5'
 
 }
 

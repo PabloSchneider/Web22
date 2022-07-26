@@ -1,7 +1,8 @@
 package de.hsrm.mi.web.projekt.benutzerprofil;
 
-import javax.validation.Valid;
+import java.security.Principal;
 
+import javax.validation.Valid;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,6 +18,10 @@ import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.bind.support.SessionStatus;
 
 import de.hsrm.mi.web.projekt.angebot.Angebot;
+import de.hsrm.mi.web.projekt.messaging.BackendInfoService;
+import de.hsrm.mi.web.projekt.messaging.BackendOperation;
+import de.hsrm.mi.web.projekt.projektuser.ProjektUserServiceException;
+import de.hsrm.mi.web.projekt.projektuser.ProjektUserServiceImpl;
 
 
 
@@ -26,11 +31,23 @@ public class BenutzerprofilController {
     Logger logger = LoggerFactory.getLogger(BenutzerprofilController.class);
 
     @Autowired BenutzerprofilService bService;
+    @Autowired BackendInfoService backEndService;
+    @Autowired ProjektUserServiceImpl projektUserServiceImpl;
 
     @ModelAttribute("profil")
-    public void initProfil(Model m){
+    public void initProfil(Model m, Principal priz){
         logger.info("----Init----");
+         
+        try {
+            BenutzerProfil profil = projektUserServiceImpl.findeBenutzer(priz.getName()).getProfil();
+            m.addAttribute("profil", profil);
+        } catch (ProjektUserServiceException e) {
+            e.printStackTrace();
+        }
+                 
+        
         m.addAttribute("profil", new BenutzerProfil());
+        
     }
     @GetMapping("/benutzerprofil/clearsession")
     public String clearSession(SessionStatus status){
@@ -82,6 +99,7 @@ public class BenutzerprofilController {
         m.addAttribute("angebot", new Angebot());
         return "benutzerprofil/angebotsformular";
     }
+    
     @PostMapping("/benutzerprofil/angebot")
     public String postAngebot(Model m, @ModelAttribute("angebot") Angebot angebot
     ){
@@ -91,6 +109,8 @@ public class BenutzerprofilController {
         bService.fuegeAngebotHinzu(profil.getId(), angebot);
         m.addAttribute("profil", bService.holeBenutzerProfilMitId(profil.getId()).get());
         logger.info(angebot.toString()+"--"+profil.toString());
+        backEndService.sendInfo("angebot", BackendOperation.CREATE, angebot.getId());
+
         return "redirect:/benutzerprofil";
     }
     @GetMapping("/benutzerprofil/angebot/{id}/del")
@@ -103,6 +123,8 @@ public class BenutzerprofilController {
         //logger.info(profil.toString() + "id: " + profil.getId());
         m.addAttribute("profil", bService.holeBenutzerProfilMitId(profil.getId()).get());
         // logger.info(profil.toString() + "id: " + profil.getId());
+        backEndService.sendInfo("angebot", BackendOperation.DELETE, id);
+
         return "redirect:/benutzerprofil";
     }
         

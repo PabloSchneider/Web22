@@ -11,8 +11,11 @@ long anbieterid,
 String anbietername,
 long mindestpreis,
 LocalDateTime ablaufzeitpunkt,
-String abholort, double lat, double lon,
-long topgebot, long gebote) 
+String abholort, 
+double lat, 
+double lon,
+long topgebot, 
+long gebote) 
 {
     
     static GetAngebotResponseDTO from(Angebot a){

@@ -1,0 +1,30 @@
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+
+<head encoding="utf-8">
+    <link rel="stylesheet" type="text/css" href="/error.css" />
+</head>
+
+<body>
+    <h1 th:text="#{registeruser.titel}"> Benutzer regestieren</h1>
+    <div>
+        <a th:href="@{?sprache=de}">de</a>
+        <a th:href="@{?sprache=en}">en</a>
+        <a th:href="@{?sprache=nl}">nl</a>
+    </div>
+
+    <form th:action="@{/registrieren}" method="POST" th:object="${projektuser}">
+        <label for="username" th:text="#{registeruser.username}">Ihr gewählter Login-Name</label><br>
+        <input type="text" name="username" th:field="*{username}" th:errorclass="error" /><br>
+        <div th:if="${#fields.hasErrors('username')}" th:errors="*{username}" th:errorclass="error"></div><br>
+
+        <label for="passwort" th:text="#{registeruser.password}">Losung</label><br>
+        <input type="text" name="password" th:field="*{password}" th:errorclass="error" /><br>
+        <div th:if="${#fields.hasErrors('password')}" th:errors="*{password}" th:errorclass="error"></div><br>
+        <button type="submit" th:text="#{registeruser.speichern}"></button>
+    </form>
+
+    <a th:href="@{/login}">
+        <button th:text="#{registeruser.abbrechen} ">Quit</button>
+    </a>
+
+</body>

@@ -46,18 +46,16 @@ public class BenutzerprofilServiceImpl implements BenutzerprofilService{
         logger.info(""+bp.getLat()+ " ----- " + bp.getLon());
         return bp;
     }
-
     @Override
     public Optional<BenutzerProfil> holeBenutzerProfilMitId(Long id) {
         return repository.findById(id); 
 
     }
-
     @Override
     public List<BenutzerProfil> alleBenutzerProfile(){
         return repository.findAll(Sort.by("name"));
     }
-
+    @Transactional
     @Override
     public void loescheBenutzerProfilMitId(Long loesch){
         repository.deleteById(loesch);

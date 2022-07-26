@@ -29,12 +29,11 @@
 
 <script setup lang="ts">
     import type {IAngebotListeItem} from '@/services/IAngebotListeItem.js'
-import { ref } from 'vue';
+    import { ref } from 'vue';
 
     const props = defineProps<{
         a:IAngebotListeItem 
     }>();
-    props.a.abholort
     const boolforOpenrf = ref(false);
 
 </script>
