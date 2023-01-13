@@ -70,7 +70,7 @@ public class BenutzerProfil implements Serializable{
     @OneToMany(mappedBy="gebieter", cascade = CascadeType.ALL , orphanRemoval = true, fetch = FetchType.EAGER)
     private List<Gebot> gebote;
 
-    @OneToOne(mappedBy = "profil", cascade = CascadeType.REMOVE)
+    @OneToOne(mappedBy = "profil", cascade=CascadeType.ALL)
     private ProjektUser projektUser;
 
     public BenutzerProfil(){

@@ -29,13 +29,10 @@ public class ProjektUserServiceImpl implements ProjektUserService{
             ProjektUser user  = new ProjektUser(username,pEncoder.encode(klartextpasswort), rolle);
             BenutzerProfil benutzer = new BenutzerProfil();
             benutzer.setName(username);
-
             benutzer.setProjektUser(user);
             user.setProfil(benutzer);
-            
-            projektRepository.save(user);
+            //projektRepository.save(user);
             bRepository.save(benutzer);
-
             return user;
         }
         else{

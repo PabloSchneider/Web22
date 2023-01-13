@@ -20,6 +20,7 @@ import de.hsrm.mi.web.projekt.gebot.GebotServiceImpl;
 public class GebotRestController {
     
     @Autowired GebotServiceImpl gServiceImpl;
+    
     @GetMapping(value ="", produces=MediaType.APPLICATION_JSON_VALUE)
     public List<GetGebotResponseDTO> getAllGebote(){
         List<Gebot> gebote = gServiceImpl.findeAlleGebote();
@@ -29,6 +30,7 @@ public class GebotRestController {
         }
         return gebotDTO;
     }
+    
     @PostMapping(value = "", produces=MediaType.APPLICATION_JSON_VALUE)
     public long addGebot(@RequestBody GetGebotResponseDTO newGebot){
         gServiceImpl.bieteFuerAngebot(newGebot.gebieterid(), newGebot.angebotid(), newGebot.betrag());

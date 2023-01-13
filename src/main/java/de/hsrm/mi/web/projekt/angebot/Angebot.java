@@ -1,5 +1,6 @@
 package de.hsrm.mi.web.projekt.angebot;
 
+import java.io.Serializable;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
@@ -20,7 +21,7 @@ import de.hsrm.mi.web.projekt.benutzerprofil.BenutzerProfil;
 import de.hsrm.mi.web.projekt.gebot.Gebot;
 
 @Entity
-public class Angebot {
+public class Angebot{
     
     @Id 
     @GeneratedValue

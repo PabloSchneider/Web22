@@ -1,5 +1,6 @@
 package de.hsrm.mi.web.projekt.projektuser;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.OneToOne;
@@ -23,7 +24,7 @@ public class ProjektUser {
 
     private String role;
 
-    @OneToOne
+    @OneToOne(cascade=CascadeType.ALL)
     private BenutzerProfil profil;
 
 

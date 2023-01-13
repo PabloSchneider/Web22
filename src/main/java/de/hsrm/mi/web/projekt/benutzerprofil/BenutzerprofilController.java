@@ -35,7 +35,7 @@ public class BenutzerprofilController {
     @Autowired ProjektUserServiceImpl projektUserServiceImpl;
 
     @ModelAttribute("profil")
-    public void initProfil(Model m, Principal priz){
+    public void initProfil(Model m, Principal priz){ //prinz repräsentiert eine autentifizierbare Entität
         logger.info("----Init----");
          
         try {
