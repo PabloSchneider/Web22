@@ -1,9 +1,9 @@
 # Web22
 
-Projekt im Rahmen des Modules Webanwendung.
-In dem Mudul haben wir einen mini Onlineshop gebaut, wo man Gegstände anbeiten kann und für die bieten kann.
-Natürlich ist das nur sehr prototüpisch und kein richtiger Onlineshop.
-Mit folgenden Thematik haben wir und in Verlauf der Veranstaltung bafasst:
+Projekt im Rahmen des Moduls Webanwendung.
+In dem Modul haben wir einen mini Onlineshop gebaut, wo man Gegenstände anbieten kann und für die bieten kann.
+Natürlich ist das nur sehr prototypisch und kein richtiger Onlineshop.
+Mit folgender Thematik haben wir und in Verlauf der Veranstaltung befasst:
 - Spring
 - Java Pseristence API
 - Rest-Services
